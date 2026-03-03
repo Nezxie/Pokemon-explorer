@@ -35,4 +35,7 @@ What is still lacking:
 - better styling, animations
 - responsiveness, I guess MUI design is not mobile friendly out of the box
 
+See recordings of the solution below:
+![dark_theme](https://github.com/user-attachments/assets/5f1228f3-4adc-4655-b389-3ad84800a23b)
+![light_theme](https://github.com/user-attachments/assets/01d3f4ab-1d4a-4e75-b3cb-364a048125d6)
 
