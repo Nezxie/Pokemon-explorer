@@ -17,16 +17,22 @@ If you want to see the page live without the hassle of setting it up yourself ju
 
 This project was done as part of the recruitment process with a 3h mark and is not complete yet.
 
-What i was able to implement:
+What i was able to implement originaly:
 - getting pokemon data on init
 - load more option with paging set at 25
 - fillter pills with correct colors
 - fillter pills store selected fillters (just not visually yet)
 
-What i didn't have time to implement:
-- search bar functionality 
-- filtering (got stuck on deciding if I should just filter the list we have or if I should do it properly with calls, because the API does not provide an endpoint for multiple types search, so I would have to implement it by hand)
-- proper styling (and sorting out the dark mode)
+Now I have also added:
+- search bar functionality with debouncing
+- filtering data locally
+- basic styling to roughly match the design (it's not pixel perfect and I wasn't really aiming for that) + dark mode should not break the design now
+- text for empty list
+- guards for race conditions
 
-I might finish it on a separate branch because how it looks right now is genuinely making me angry, so I'm sorry you have to experience that.
+What is still lacking:
+- switching between query mode and infinite load mode causes bugs that needs pinpointing
+- better styling, animations
+- responsiveness, I guess MUI design is not mobile friendly out of the box
+
 
