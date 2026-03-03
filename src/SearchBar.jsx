@@ -3,7 +3,7 @@ import {pokemonTypes} from './colorList'
 import { useRef } from "react";
 import './styles/SearchBar.css';
 
-export default function SearchBar({onFilter, onSearch}){
+export default function SearchBar({onFilter, onSearch, filters}){
     const debounceRef = useRef(null);
     
     function onSearchInputChange(value){
@@ -21,9 +21,9 @@ export default function SearchBar({onFilter, onSearch}){
         <Stack direction="row" justifyContent="center" marginY="2rem" spacing={1}>
             {
                 pokemonTypes.map((type)=>{
-                    
+                    let isSelected = filters.includes(type);
                     return(
-                        <Chip key={type} label={type} onClick={()=>{onFilter(type)}} color={type} className='pill-filter'/>
+                        <Chip key={type} label={type} onClick={()=>{onFilter(type)}} color={type} className={`pill-filter ${isSelected?"selected-filter":""}`}/>
                     )
                 })
             }

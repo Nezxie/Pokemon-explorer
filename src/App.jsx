@@ -82,7 +82,7 @@ function App() {
       alt='pokeball icon'
       style={{ width: '1em', height: '1em', verticalAlign: "middle"}}
      ></img>Pokémon explorer</Typography>
-     <SearchBar onFilter={filterByType} onSearch={searchPokemon}/>
+     <SearchBar onFilter={filterByType} onSearch={searchPokemon} filters={filters}/>
      <PokemonList pokemonList={pokemonList} onShowMore={onShowMore}/>
     </ThemeProvider>
   )

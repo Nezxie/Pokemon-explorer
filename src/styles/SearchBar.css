@@ -14,3 +14,7 @@
     text-transform: capitalize;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+
+.MuiChip-clickable.pill-filter.selected-filter{
+    outline: solid var(--text-color) 3px;
+}
