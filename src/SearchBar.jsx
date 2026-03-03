@@ -11,7 +11,7 @@ export default function SearchBar({onFilter, onSearch}){
         }
         debounceRef.current = setTimeout(()=>{
             onSearch(value)
-        },1000)
+        },500)
     }
 
     return (

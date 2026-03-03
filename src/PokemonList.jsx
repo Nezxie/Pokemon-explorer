@@ -16,7 +16,7 @@ export default function PokemonList({pokemonList, onShowMore}){
                 })
             }
             </Grid>
-            <Button variant="contained" onClick={()=>{onShowMore}}>Load more</Button>
+            <Button variant="contained" onClick={()=>{onShowMore()}}>Load more</Button>
         </>
     );
 }

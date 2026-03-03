@@ -1,11 +1,12 @@
+import {useState , useEffect, useRef} from 'react'
 import SearchBar from './SearchBar'
 import PokemonList from './PokemonList'
-import './App.css'
-import logo from './assets/poke-ball.png'
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {pokemonColors} from './assets/colorList'
-import {useState , useEffect} from 'react'
+import {fetchPageOfPokemon, fetchPokemonByName} from './fetchCalls.js'
+import logo from './assets/poke-ball.png'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import './App.css'
 
 const theme = createTheme({
   palette: {
@@ -13,30 +14,13 @@ const theme = createTheme({
   },
 });
 
-const pageSize = 25;
-
-async function fetchPokemonList(limit, offset){
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
-    const data = await response.json();
-    return data.results;
-}
-
-async function fetchPokemonDetails(url){
-    const response = await fetch(url);
-    const data = await response.json();
-    return {
-            id: data.id,
-            name: data.name,
-            image: data.sprites.front_default,
-            types: data.types.map(t => t.type.name),
-          }
-}
-
 function App() {
   const [pokemonList, setPokemonList]=useState([]);
-  const [pageNo, setPageNo] = useState(0)
+  const [pageNumber, setPageNumber] = useState(0)
   const [filters, setFilters] = useState([]);
-    
+  const [isSearchMode, setIsSearchMode] = useState(false);
+  const searchRequestRef = useRef(0);
+
   function filterByType(type){
         let index = filters.indexOf(type);
         if(index !== -1){
@@ -48,32 +32,48 @@ function App() {
   }
 
   function onShowMore(){
-    setPageNo(pageNo+1)
+    setPageNumber(pageNumber+1);
   }
 
   function clearPokemonList(){
     setPokemonList([]);
+    setPageNumber(0);
   }
 
-  function searchPokemon(value){
-    console.log(value)
-    clearPokemonList();
-
+  async function searchPokemon(value){
+    if(!value.trim()){
+      clearPokemonList();
+      setIsSearchMode(false);
+    }
+    else{
+      setIsSearchMode(true);
+      const requestId = ++searchRequestRef.current;
+      const foundPokemon = await fetchPokemonByName(value);
+      if (requestId !== searchRequestRef.current){
+        return;
+      }
+      if(foundPokemon){
+        setPokemonList([foundPokemon])
+      }
+      else{
+        clearPokemonList();
+      }
+    }
   }
 
     useEffect(()=>{
+      let isStale = false;
+      if(!isSearchMode){
         const loadPokemons = async () => {
-            const listOfPokemonNames = await fetchPokemonList(pageSize, pageNo*pageSize);
-            const pokemonData = await Promise.all(
-                listOfPokemonNames.map((pokemon)=>{
-                    return fetchPokemonDetails(pokemon.url);
-                })
-            )
-            setPokemonList([...pokemonList,...pokemonData]);
+            const pokemonData = await fetchPageOfPokemon(pageNumber);
+            if(!isStale){
+              setPokemonList(prev=>[...prev ,...pokemonData]);
+            }
         }             
         loadPokemons();
-        
-    },[pageNo]);
+      }
+      return ()=>{ isStale = true; }
+    },[pageNumber,isSearchMode]);
 
     return (
     <ThemeProvider theme={theme}>
@@ -89,4 +89,3 @@ function App() {
 }
 
 export default App
-
