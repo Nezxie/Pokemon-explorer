@@ -28,5 +28,6 @@ What i didn't have time to implement:
 - filtering (got stuck on deciding if I should just filter the list we have or if I should do it properly with calls, because the API does not provide an endpoint for multiple types search, so I would have to implement it by hand)
 - proper styling (and sorting out the dark mode)
 
-I might finish it on a separate branch because how it looks right now is genuinely making me angry, so I'm sorry you have to experience that.
+I might finish it on a separate branch because how it looks right now is genuinely making me angry, so I'm sorry you have to experience that. [^1]
+[^1]:I actually did almost finish it, you can check it out here https://github.com/Nezxie/Pokemon-explorer/tree/over-the-3h-mark
 
