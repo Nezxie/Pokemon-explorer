@@ -2,11 +2,11 @@ import {useState , useEffect, useRef} from 'react'
 import SearchBar from './SearchBar'
 import PokemonList from './PokemonList'
 import Typography from '@mui/material/Typography';
-import {pokemonColors} from './assets/colorList'
+import {pokemonColors} from './colorList.js'
 import {fetchPageOfPokemon, fetchPokemonByName} from './fetchCalls.js'
 import logo from './assets/poke-ball.png'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import './App.css'
+import './styles/App.css'
 
 const theme = createTheme({
   palette: {
@@ -77,7 +77,7 @@ function App() {
 
     return (
     <ThemeProvider theme={theme}>
-     <Typography variant="h3" component="h1"><img 
+     <Typography variant="h3" component="h1" className='header'><img 
       src={logo}
       alt='pokeball icon'
       style={{ width: '1em', height: '1em', verticalAlign: "middle"}}

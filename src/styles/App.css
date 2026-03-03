@@ -1,0 +1,12 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+h1.MuiTypography-h3.header{
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg,red,orange);
+  font-weight: 600;
+}

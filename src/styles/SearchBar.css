@@ -1,0 +1,16 @@
+#search-bar{
+    color:var(--text-color);
+    border-radius: 1rem;
+    background-color: var(--bg-shade-color);
+    padding: .5rem 1rem;
+    max-width: 90vw;
+    width: 550px;
+    margin-top:2rem;
+}
+
+.MuiChip-clickable.pill-filter{
+    color:#fff;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}

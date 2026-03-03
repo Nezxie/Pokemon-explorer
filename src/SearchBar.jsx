@@ -1,6 +1,7 @@
-import {TextField, Chip, Stack} from '@mui/material';
-import {pokemonTypes} from './assets/colorList'
+import {Input, Chip, Stack} from '@mui/material';
+import {pokemonTypes} from './colorList'
 import { useRef } from "react";
+import './styles/SearchBar.css';
 
 export default function SearchBar({onFilter, onSearch}){
     const debounceRef = useRef(null);
@@ -16,13 +17,13 @@ export default function SearchBar({onFilter, onSearch}){
 
     return (
         <>
-        <TextField id="search-bar" label="Search pokemon" variant="filled" onChange={(e)=>{onSearchInputChange(e.target.value)}}/>
-        <Stack direction="row" spacing={1}>
+        <Input id="search-bar" disableUnderline={true}  placeholder="Search pokemon..." variant="filled" onChange={(e)=>{onSearchInputChange(e.target.value)}} />
+        <Stack direction="row" justifyContent="center" marginY="2rem" spacing={1}>
             {
                 pokemonTypes.map((type)=>{
                     
                     return(
-                        <Chip key={type} label={type} onClick={()=>{onFilter(type)}} color={type}/>
+                        <Chip key={type} label={type} onClick={()=>{onFilter(type)}} color={type} className='pill-filter'/>
                     )
                 })
             }

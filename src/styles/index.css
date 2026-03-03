@@ -2,10 +2,13 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --text-color:rgba(255, 255, 255, 0.87);
+  --bg-color:#242424;
+  --bg-shade-color:#363636;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -56,8 +59,9 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --text-color:#000;
+    --bg-color:#f3f1f1;
+    --bg-shade-color:#e3e3e3;
   }
   a:hover {
     color: #747bff;

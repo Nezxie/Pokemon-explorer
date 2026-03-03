@@ -1,5 +1,6 @@
 import PokemonCard from "./PokemonCard";
 import { Grid, Button } from "@mui/material";
+import './styles/PokemonList.css'
 
 export default function PokemonList({pokemonList, onShowMore}){
     return (
@@ -16,7 +17,7 @@ export default function PokemonList({pokemonList, onShowMore}){
                 })
             }
             </Grid>
-            <Button variant="contained" onClick={()=>{onShowMore()}}>Load more</Button>
+            <Button variant="contained" className="load-more-button" onClick={()=>{onShowMore()}}>Load more</Button>
         </>
     );
 }

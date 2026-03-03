@@ -1,0 +1,5 @@
+.MuiButton-contained.MuiButton-containedPrimary.load-more-button{
+    text-transform: capitalize;
+    border-radius: 2rem;
+    margin-top:1rem;
+}
