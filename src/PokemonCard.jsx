@@ -5,7 +5,6 @@ import {pokemonColors} from './colorList.js'
 export default function PokemonCard({pokemonData}){
     const colors = pokemonData.types.map(type => pokemonColors[type].main || "#ccc")
     const cardBackground = colors.length === 1?colors[0]:`linear-gradient(135deg, ${colors.join(", ")})`
-    console.log(cardBackground)
     return (
         <Card
             sx={{

@@ -15,6 +15,7 @@ const theme = createTheme({
 });
 
 function App() {
+  const [allPokemonList, setAllPokemonList]=useState([]);
   const [pokemonList, setPokemonList]=useState([]);
   const [pageNumber, setPageNumber] = useState(0)
   const [filters, setFilters] = useState([]);
@@ -31,12 +32,26 @@ function App() {
         }
   }
 
+  function filterList(){
+    if(filters.length === 0){
+    setPokemonList(allPokemonList);
+    }
+    else{
+      let newPokemonList = allPokemonList.filter((pokemon)=>{
+        return pokemon.types.some(type=>filters.includes(type))
+      })
+      setPokemonList(newPokemonList);
+    }
+  }
+
   function onShowMore(){
     setPageNumber(pageNumber+1);
   }
 
   function clearPokemonList(){
     setPokemonList([]);
+    setAllPokemonList([]);
+    setFilters([]);
     setPageNumber(0);
   }
 
@@ -68,12 +83,18 @@ function App() {
             const pokemonData = await fetchPageOfPokemon(pageNumber);
             if(!isStale){
               setPokemonList(prev=>[...prev ,...pokemonData]);
+              setAllPokemonList(prev=>[...prev ,...pokemonData])
             }
         }             
         loadPokemons();
       }
       return ()=>{ isStale = true; }
     },[pageNumber,isSearchMode]);
+
+    useEffect(()=>{
+      filterList();
+    },[filters,allPokemonList]);
+
 
     return (
     <ThemeProvider theme={theme}>
@@ -83,7 +104,7 @@ function App() {
       style={{ width: '1em', height: '1em', verticalAlign: "middle"}}
      ></img>Pokémon explorer</Typography>
      <SearchBar onFilter={filterByType} onSearch={searchPokemon} filters={filters}/>
-     <PokemonList pokemonList={pokemonList} onShowMore={onShowMore}/>
+     <PokemonList pokemonList={pokemonList} onShowMore={onShowMore} showLoadMoreButton={!isSearchMode}/>
     </ThemeProvider>
   )
 }
