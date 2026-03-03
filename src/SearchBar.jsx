@@ -1,28 +1,28 @@
-import {useState} from "react";
 import {TextField, Chip, Stack} from '@mui/material';
 import {pokemonTypes} from './assets/colorList'
+import { useRef } from "react";
 
-export default function SearchBar({}){
-    const [filters, setFilters] = useState([]);
-    function filterByType(type){
-        let index = filters.indexOf(type);
-        if(index !== -1){
-            setFilters(filters.filter(t=>t!==type));
+export default function SearchBar({onFilter, onSearch}){
+    const debounceRef = useRef(null);
+    
+    function onSearchInputChange(value){
+        if (debounceRef.current){
+            clearTimeout(debounceRef.current)
         }
-        else{
-            setFilters([...filters,type]) ;
-        }
+        debounceRef.current = setTimeout(()=>{
+            onSearch(value)
+        },1000)
     }
 
     return (
         <>
-        <TextField id="search-bar" label="Search pokemon" variant="filled" />
+        <TextField id="search-bar" label="Search pokemon" variant="filled" onChange={(e)=>{onSearchInputChange(e.target.value)}}/>
         <Stack direction="row" spacing={1}>
             {
                 pokemonTypes.map((type)=>{
                     
                     return(
-                        <Chip key={type} label={type} onClick={()=>{filterByType(type)}} color={type}/>
+                        <Chip key={type} label={type} onClick={()=>{onFilter(type)}} color={type}/>
                     )
                 })
             }
